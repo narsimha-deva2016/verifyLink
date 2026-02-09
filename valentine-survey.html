@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Survey ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .page {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.6);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+            font-size: 1.5em;
+            padding: 20px 60px;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(245, 87, 108, 0.6);
+        }
+
+        .btn-no {
+            background: #e0e0e0;
+            color: #666;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .button-container {
+            position: relative;
+            height: 200px;
+            margin-top: 30px;
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 4s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .final-page {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-page h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+
+        .final-page p {
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .love-emoji {
+            font-size: 4em;
+            margin: 20px;
+            display: inline-block;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Welcome -->
+    <div class="page active" id="page1">
+        <h1>Hi Cutie! 💕</h1>
+        <p>How are you doing today?</p>
+        <p>Let's start a special survey just for you!</p>
+        <button class="btn btn-primary" onclick="nextPage()">Click to Start Survey</button>
+    </div>
+
+    <!-- Page 2: Valentine Question -->
+    <div class="page" id="page2">
+        <h1>Will You Be My Valentine? 💖</h1>
+        <p>This is a very important question...</p>
+        <div class="button-container">
+            <button class="btn btn-yes" onclick="showFinalPage()">Yes! 💕</button>
+            <button class="btn btn-no" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <!-- Page 3: Final Love Page -->
+    <div class="page final-page" id="page3">
+        <div class="love-emoji">❤️</div>
+        <div class="love-emoji">💕</div>
+        <div class="love-emoji">💖</div>
+        <h1>Thank You for Accepting My Love! 💗</h1>
+        <div class="love-emoji">😍</div>
+        <div class="love-emoji">💘</div>
+        <div class="love-emoji">💝</div>
+        <p>You've made me the happiest person in the world!</p>
+        <div class="love-emoji">🥰</div>
+        <div class="love-emoji">💞</div>
+        <div class="love-emoji">💓</div>
+    </div>
+
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <script>
+        let noClickCount = 0;
+        const noButtonTexts = [
+            "Please bha say yes 🥺",
+            "One Anthe naha Bha 😢",
+            "Think again... 💔",
+            "Are you sure? 🥺",
+            "Please please please 🙏",
+            "Don't break my heart 💔",
+            "Just say yes na 😊",
+            "Come on... 💕",
+            "Why not? 😢",
+            "I'll be sad 😭"
+        ];
+
+        function nextPage() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+        }
+
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const container = document.querySelector('.button-container');
+            
+            // Get container dimensions
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate random position within container
+            const maxX = containerRect.width - btnRect.width - 20;
+            const maxY = containerRect.height - btnRect.height - 20;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            
+            // Change button text
+            noBtn.textContent = noButtonTexts[noClickCount % noButtonTexts.length];
+            noClickCount++;
+            
+            // Make the button smaller each time
+            if (noClickCount > 3) {
+                const newSize = Math.max(0.8, 1.2 - (noClickCount * 0.05));
+                noBtn.style.transform = `scale(${newSize})`;
+            }
+        }
+
+        function showFinalPage() {
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page3').classList.add('active');
+            createHearts();
+        }
+
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💘', '💝', '💞', '💓', '💟', '❣️'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
